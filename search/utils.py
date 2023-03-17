@@ -73,3 +73,13 @@ def render_board(board: dict[tuple, tuple], ansi=False) -> str:
             output += "    "
         output += "\n"
     return output
+
+def spread(board: dict[tuple, tuple], token: tuple, direction: list[tuple]):
+    """
+    spread function. The input is the board status, tokens coordinates
+    that about to move, and move direction
+    """
+    color = board[token][0]
+    power = board[token][1]
+    targetCoordinates = tuple(map(lambda i, j: i - j, token, direction))
+    
