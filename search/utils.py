@@ -74,7 +74,24 @@ def render_board(board: dict[tuple, tuple], ansi=False) -> str:
         output += "\n"
     return output
 
-def spread(board: dict[tuple, tuple], token: tuple, direction: list[tuple]):
+def correctCoordinates(coordinates):
+    """
+    this function is being used to correct the corrdinates
+    for example: (7, 7) -> (0, 0)
+    """
+    r = coordinates[0]
+    q = coordinates[1]
+    if r < 0:
+        r = 7 - abs(r) % 7
+    else:
+        r = r % 7
+    if q < 0:
+        q = 7 - abs(q) % 7
+    else:
+        q = q % 7
+    return (r, q)
+    
+def spread(board: dict[tuple, tuple], token: tuple, direction: tuple):
     """
     spread function. The input is the board status, tokens coordinates
     that about to move, and move direction
