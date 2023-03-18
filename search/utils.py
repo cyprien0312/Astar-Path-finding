@@ -173,6 +173,40 @@ def divideTokens(board: dict[tuple, tuple]):
 
     return (redTokens, blueTokens)
 
+def redWin(board: dict[tuple, tuple]):
+    """
+    wining condition for red
+    """
+    tokens = set()
+    for token in board.keys():
+        color = board[token][0]
+        tokens.add(color)
+
+    if "b" in tokens:
+        return False
+    return True
+
+def getDirection(p1, p2):
+    """
+    calculates the moving direction given two points
+    """
+    coordinatesDifference = set([-1, 0, 1])
+    direction_r = p2[0] - p1[0]
+    direction_q = p2[1] - p1[1]
+    if direction_r not in coordinatesDifference:
+        if direction_r == 6:
+            direction_r = -1
+        if direction_r == -6:
+            direction_r = 1
+
+    if direction_q not in coordinatesDifference:
+        if direction_q == 6:
+            direction_q = -1
+        if direction_q == -6:
+            direction_q = 1
+    return (direction_r, direction_q)
+    
+
 def aStarSearch(board: dict[tuple, tuple], heuristic):
     # group redTokens and blueTokens
     dividedTokens = divideTokens(board)

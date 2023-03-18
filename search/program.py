@@ -34,9 +34,21 @@ def search(input: dict[tuple, tuple]) -> list[tuple]:
     print(render_board(input, ansi=False)) """
     # Code above are all for testing
 
-
-    path = aStarSearch(input, distance)
-    print(path)
+    actions = []
+    if redWin(input):
+        return actions
+    while not redWin(input):
+        path = aStarSearch(input, distance)
+        print(path)
+        spreadToken = path[0]
+        spreadDestination = path[1]
+        direction = getDirection(spreadToken, spreadDestination)
+        action = spreadToken + direction
+        actions.append(action)
+        spread(input, spreadToken, direction)
+        print(action)
+        print(render_board(input, ansi=False))
+    print(actions)
 
     # Here we're returning "hardcoded" actions for the given test.csv file.
     # Of course, you'll need to replace this with an actual solution...
