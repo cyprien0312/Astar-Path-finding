@@ -124,7 +124,6 @@ def addToken(board: dict[tuple, tuple], token: tuple, color: str):
         else:
             del board[token]
     else:
-        # Add the token to the board with power 1 if it's not already on the board
         board[token] = (color, 1)
 
 def distance(p1, p2):
@@ -140,9 +139,9 @@ def findClosestTwoTokens(redTokens, blueTokens):
     minDistance = 1000
     for redToken in redTokens:
         for blueToken in blueTokens:
-            distance = distance(redToken, blueToken)
-            if distance < minDistance:
-                minDistance = distance
+            tokDistance = distance(redToken, blueToken)
+            if tokDistance < minDistance:
+                minDistance = tokDistance
                 closestPair = (redToken, blueToken)
     return closestPair
 
@@ -175,8 +174,6 @@ def divideTokens(board: dict[tuple, tuple]):
     return (redTokens, blueTokens)
 
 def aStarSearch(board: dict[tuple, tuple], heuristic):
-    
-
     # group redTokens and blueTokens
     dividedTokens = divideTokens(board)
     redTokens = dividedTokens[0]
@@ -200,13 +197,19 @@ def aStarSearch(board: dict[tuple, tuple], heuristic):
         if currentToken == endToken:
             break
 
+        neighbours = findAllNeighbours(currentToken)
+
         for neighbour in neighbours:
+            newCost = cost[currentToken] + 1
+            if neighbour not in cost or newCost < cost[neighbour]:
+                cost[neighbour] = newCost
+                priority = newCost + heuristic(endToken, neighbour)
+                priorityQ.put(neighbour, priority)
+                cameFrom[neighbour] = currentToken
 
+    path = [endToken]
+    while path[-1] != startToken:
+        path.append(cameFrom[path[-1]])
+    path.reverse()
+    return path
 
-
-    
-
-
-    
-
-    
