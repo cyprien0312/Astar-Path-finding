@@ -1,6 +1,9 @@
 # COMP30024 Artificial Intelligence, Semester 1 2023
 # Project Part A: Single Player Infexion
 
+from queue import PriorityQueue
+import math
+
 def apply_ansi(str, bold=True, color=None):
     """
     Wraps a string with ANSI control codes to enable basic terminal-based
@@ -123,3 +126,73 @@ def addToken(board: dict[tuple, tuple], token: tuple, color: str):
     else:
         # Add the token to the board with power 1 if it's not already on the board
         board[token] = (color, 1)
+
+def distance(p1, p2):
+    """
+    eulidean distance of two points
+    """
+    return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
+
+def findClosestTwoTokens(redTokens, blueTokens):
+    """
+    this function find the closest blue token and red token
+    """
+    minDistance = 1000
+    for redToken in redTokens:
+        for blueToken in blueTokens:
+            distance = distance(redToken, blueToken)
+            if distance < minDistance:
+                minDistance = distance
+                closestPair = (redToken, blueToken)
+    return closestPair
+
+def findAllNeighbours(token):
+    """
+    this funciton find all six nei
+    """    
+    directions = [(0,1), (-1,1), (-1,0), (0,-1), (1,-1), (1,0)]
+    neighbours = []
+    for direction in directions:
+        neighbour = (token[0] + direction[0], token[1] + direction[1])
+        neighbours.append(correctCoordinates(neighbour))
+    return neighbours
+    
+def divideTokens(board: dict[tuple, tuple]):
+    """
+    divide blue tokens and red tokens
+    """
+    redTokens = []
+    blueTokens = []
+
+    # divide tokens by color
+    for token in board.keys():
+        color = board[token][0]
+        if color == 'r':
+            redTokens.append(token)
+        else:
+            blueTokens.append(token)
+
+    return (redTokens, blueTokens)
+
+def aStarSearch(board: dict[tuple, tuple], heuristic):
+    
+
+    # group redTokens and blueTokens
+    dividedTokens = divideTokens(board)
+    redTokens = dividedTokens[0]
+    blueTokens = dividedTokens[1]
+
+    # find closest two tokens
+    closestPair = findClosestTwoTokens(redTokens, blueTokens)
+    startToken = closestPair[0]
+    endToken = closestPair[1] 
+
+    neighbours = findAllNeighbours(startToken)
+
+
+    
+
+
+    
+
+    

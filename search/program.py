@@ -33,7 +33,10 @@ def search(input: dict[tuple, tuple]) -> list[tuple]:
     spread(input, (6, 3), (-1, 0) )
     print(render_board(input, ansi=False)) """
     # Code above are all for testing
-    
+
+
+    aStarSearch(input, distance)
+
 
     # Here we're returning "hardcoded" actions for the given test.csv file.
     # Of course, you'll need to replace this with an actual solution...
