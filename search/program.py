@@ -21,7 +21,16 @@ def search(input: dict[tuple, tuple]) -> list[tuple]:
     print(render_board(input, ansi=False))
     spread(input,(5,6),(-1,1))
     print(render_board(input, ansi=False))
-    
+    spread(input,(3,1),(0,1))
+    print(render_board(input, ansi=False))
+    spread(input,(3,2),(-1,1))
+    print(render_board(input, ansi=False))
+    spread(input,(1,4),(0,-1))
+    print(render_board(input, ansi=False))
+    spread(input,(1,3),(0,-1))
+    print(render_board(input, ansi=False))
+
+
     # Here we're returning "hardcoded" actions for the given test.csv file.
     # Of course, you'll need to replace this with an actual solution...
     return [
