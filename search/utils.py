@@ -104,6 +104,8 @@ def spread(board: dict[tuple, tuple], token: tuple, direction: tuple):
         curr_tok = correctCoordinates((curr_tok[0] + direction[0], curr_tok[1] + direction[1]))
         addToken(board,curr_tok,color)
         power -= 1
+
+    # delete the token being spreaded
     del board[token]
     
 
@@ -113,11 +115,11 @@ def addToken(board: dict[tuple, tuple], token: tuple, color: str):
     and remove it if its power reaches 7.
     """
     if token in board:
-            current_power = board[token][1]
-            if current_power < 7:
-                board[token] = (color, current_power + 1)
-            else:
-                del board[token]
+        current_power = board[token][1] + 1
+        if current_power < 7:
+            board[token] = (color, current_power)
+        else:
+            del board[token]
     else:
         # Add the token to the board with power 1 if it's not already on the board
         board[token] = (color, 1)
