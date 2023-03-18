@@ -1,6 +1,6 @@
 # COMP30024 Artificial Intelligence, Semester 1 2023
 # Project Part A: Single Player Infexion
-
+from collections import defaultdict
 from queue import PriorityQueue
 import math
 
@@ -188,6 +188,20 @@ def aStarSearch(board: dict[tuple, tuple], heuristic):
     endToken = closestPair[1] 
 
     neighbours = findAllNeighbours(startToken)
+
+    priorityQ = PriorityQueue()
+    priorityQ.put(startToken, 0)
+    cameFrom = defaultdict(tuple)
+    cost = defaultdict(float)
+
+    while not priorityQ.empty():
+        currentToken = priorityQ.get()
+
+        if currentToken == endToken:
+            break
+
+        for neighbour in neighbours:
+
 
 
     
