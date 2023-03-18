@@ -147,7 +147,7 @@ def findClosestTwoTokens(redTokens, blueTokens):
 
 def findAllNeighbours(token):
     """
-    this funciton find all six nei
+    this funciton find all six neigoubours
     """    
     directions = [(0,1), (-1,1), (-1,0), (0,-1), (1,-1), (1,0)]
     neighbours = []
