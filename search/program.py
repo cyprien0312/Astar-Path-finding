@@ -1,7 +1,7 @@
 # COMP30024 Artificial Intelligence, Semester 1 2023
 # Project Part A: Single Player Infexion
 
-from .utils import render_board
+from .utils import *
 
 directions = [(0,1), (-1,1), (-1,0), (0,-1), (1,-1), (1,0)]
 
@@ -19,7 +19,9 @@ def search(input: dict[tuple, tuple]) -> list[tuple]:
     # board state in a human-readable format. Try changing the ansi argument 
     # to True to see a colour-coded version (if your terminal supports it).
     print(render_board(input, ansi=False))
-
+    spread(input,(5,6),(-1,1))
+    print(render_board(input, ansi=False))
+    
     # Here we're returning "hardcoded" actions for the given test.csv file.
     # Of course, you'll need to replace this with an actual solution...
     return [

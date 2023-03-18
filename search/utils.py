@@ -74,7 +74,7 @@ def render_board(board: dict[tuple, tuple], ansi=False) -> str:
         output += "\n"
     return output
 
-def correctCoordinates(coordinates):
+def correctCoordinates(coordinates: tuple):
     """
     this function is being used to correct the corrdinates
     for example: (7, 7) -> (0, 0)
@@ -98,5 +98,26 @@ def spread(board: dict[tuple, tuple], token: tuple, direction: tuple):
     """
     color = board[token][0]
     power = board[token][1]
-    targetCoordinates = tuple(map(lambda i, j: i - j, token, direction))
+    curr_tok = token
     
+    while power > 0 :
+        curr_tok = correctCoordinates((curr_tok[0] + direction[0], curr_tok[1] + direction[1]))
+        addToken(board,curr_tok,color)
+        power -= 1
+    del board[token]
+    
+
+def addToken(board: dict[tuple, tuple], token: tuple, color: str):
+    """
+    Add a token to the board, increment its power if it's already present,
+    and remove it if its power reaches 7.
+    """
+    if token in board:
+            current_power = board[token][1]
+            if current_power < 7:
+                board[token] = (color, current_power + 1)
+            else:
+                del board[token]
+    else:
+        # Add the token to the board with power 1 if it's not already on the board
+        board[token] = (color, 1)
