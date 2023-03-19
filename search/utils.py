@@ -132,6 +132,13 @@ def distance(p1, p2):
     """
     return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
 
+def manhattan_distance(p1, p2):
+    """
+    Manhattan distance of two points
+    """
+    return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
+
+
 def findClosestTwoTokens(redTokens, blueTokens):
     """
     this function find the closest blue token and red token
@@ -144,6 +151,13 @@ def findClosestTwoTokens(redTokens, blueTokens):
                 minDistance = tokDistance
                 closestPair = (redToken, blueToken)
     return closestPair
+
+def sortBoardByPower(board: dict[tuple, tuple]):
+    """
+    Sort the board dictionary by token power in descending order
+    """
+    sorted_board = sorted(board.items(), key=lambda x: x[1][1], reverse=True)
+    return dict(sorted_board)
 
 def findAllNeighbours(token):
     """
@@ -162,15 +176,15 @@ def divideTokens(board: dict[tuple, tuple]):
     """
     redTokens = []
     blueTokens = []
-
+    sortboard = sortBoardByPower(board)
     # divide tokens by color
-    for token in board.keys():
+    for token in sortboard.keys():
         color = board[token][0]
         if color == 'r':
             redTokens.append(token)
         else:
             blueTokens.append(token)
-
+    
     return (redTokens, blueTokens)
 
 def redWin(board: dict[tuple, tuple]):
