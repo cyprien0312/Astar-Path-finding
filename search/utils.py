@@ -146,7 +146,8 @@ def findClosestTwoTokens(redTokens, blueTokens):
     minDistance = 1000
     for redToken in redTokens:
         for blueToken in blueTokens:
-            tokDistance = distance(redToken, blueToken)
+            tokDistance = manhattan_distance(redToken, blueToken)
+            print(redToken,blueToken,tokDistance)
             if tokDistance < minDistance:
                 minDistance = tokDistance
                 closestPair = (redToken, blueToken)
@@ -184,7 +185,7 @@ def divideTokens(board: dict[tuple, tuple]):
             redTokens.append(token)
         else:
             blueTokens.append(token)
-    
+    print(redTokens," red")
     return (redTokens, blueTokens)
 
 def redWin(board: dict[tuple, tuple]):
@@ -241,19 +242,21 @@ def aStarSearch(board: dict[tuple, tuple], heuristic):
 
     while not priorityQ.empty():
         currentToken = priorityQ.get()
-
+        print(currentToken, "curr")
         if currentToken == endToken:
             break
 
         neighbours = findAllNeighbours(currentToken)
-
+        
         for neighbour in neighbours:
             newCost = cost[currentToken] + 1
             if neighbour not in cost or newCost < cost[neighbour]:
                 cost[neighbour] = newCost
                 priority = newCost + heuristic(endToken, neighbour)
+                print("current ", currentToken," goes into ", neighbour, " with h", heuristic(endToken, neighbour), "new cost:", newCost, "p = ", priority)
                 priorityQ.put(neighbour, priority)
                 cameFrom[neighbour] = currentToken
+    
 
     path = [endToken]
     while path[-1] != startToken:

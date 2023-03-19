@@ -38,8 +38,8 @@ def search(input: dict[tuple, tuple]) -> list[tuple]:
     if redWin(input):
         return actions
     while not redWin(input):
-        path = aStarSearch(input, distance)
-        print(path)
+        path = aStarSearch(input, manhattan_distance)
+        print(path, "path")
         spreadToken = path[0]
         spreadDestination = path[1]
         direction = getDirection(spreadToken, spreadDestination)
