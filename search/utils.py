@@ -236,12 +236,12 @@ def aStarSearch(board: dict[tuple, tuple], heuristic):
     neighbours = findAllNeighbours(startToken)
 
     priorityQ = PriorityQueue()
-    priorityQ.put(startToken, 0)
+    priorityQ.put((0, startToken))
     cameFrom = defaultdict(tuple)
     cost = defaultdict(float)
 
     while not priorityQ.empty():
-        currentToken = priorityQ.get()
+        p, currentToken = priorityQ.get()
         print(currentToken, "curr")
         if currentToken == endToken:
             break
@@ -254,7 +254,7 @@ def aStarSearch(board: dict[tuple, tuple], heuristic):
                 cost[neighbour] = newCost
                 priority = newCost + heuristic(endToken, neighbour)
                 print("current ", currentToken," goes into ", neighbour, " with h", heuristic(endToken, neighbour), "new cost:", newCost, "p = ", priority)
-                priorityQ.put(neighbour, priority)
+                priorityQ.put((priority, neighbour))
                 cameFrom[neighbour] = currentToken
     
 
