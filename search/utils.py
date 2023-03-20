@@ -220,6 +220,16 @@ def getDirection(p1, p2):
         if direction_q == -6:
             direction_q = 1
     return (direction_r, direction_q)
+
+def chebyshevDistance(p1, p2):
+    """
+    chebyshev distance
+    """
+    p1_r = p1[0]
+    p1_q = p1[1]
+    p2_r = p2[0]
+    p2_q = p2[1]
+    return max(abs(p2_r - p1_r), abs(p2_q - p1_q), abs(p1_r + p1_q - p2_r - p2_q))
     
 
 def aStarSearch(board: dict[tuple, tuple], heuristic):
