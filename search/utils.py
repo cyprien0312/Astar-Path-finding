@@ -146,7 +146,7 @@ def findClosestTwoTokens(redTokens, blueTokens):
     minDistance = 1000
     for redToken in redTokens:
         for blueToken in blueTokens:
-            tokDistance = manhattan_distance(redToken, blueToken)
+            tokDistance = distance(redToken, blueToken)
             print(redToken,blueToken,tokDistance)
             if tokDistance < minDistance:
                 minDistance = tokDistance

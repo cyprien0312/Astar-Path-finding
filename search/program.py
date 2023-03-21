@@ -33,12 +33,12 @@ def search(input: dict[tuple, tuple]) -> list[tuple]:
     spread(input, (6, 3), (-1, 0) )
     print(render_board(input, ansi=False)) """
     # Code above are all for testing
-
+    print(render_board(input, ansi=False))
     actions = []
     if redWin(input):
         return actions
     while not redWin(input):
-        path = aStarSearch(input, manhattan_distance)
+        path = aStarSearch(input, distance)
         print(path, "path")
         spreadToken = path[0]
         spreadDestination = path[1]
